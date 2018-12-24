@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace PalTracker {
 
     [Route("/")]
+    [ValidateModel]
     public class WelcomeController : ControllerBase
     {
         
@@ -14,6 +15,11 @@ namespace PalTracker {
 
         [HttpGet]
         public string SayHello() => _message.Message;
+
+        [HttpPost]
+        public IActionResult postMessage( [FromBody] WelcomeMessage message ){
+            return new OkObjectResult(message.Message);
+        }
 
     }
 }
